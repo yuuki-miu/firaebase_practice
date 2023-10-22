@@ -32,7 +32,7 @@ migrate_working_dir/
 .pub/
 /build/
 .fvm/flutter_sdk
-.fvm/fvm_config.json
+.fvm/
 
 # Symbolication related
 app.*.symbols
