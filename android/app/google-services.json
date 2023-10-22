@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "570844827713",
+    "project_id": "fir-memo-app-c4870",
+    "storage_bucket": "fir-memo-app-c4870.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570844827713:android:0a1db61fea1e2a08efb6c0",
+        "android_client_info": {
+          "package_name": "com.example.firebase_practice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBT5N_gY2sFOdHd3jnoJRBfR7FfYHUoA8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
