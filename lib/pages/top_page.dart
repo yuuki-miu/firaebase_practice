@@ -1,3 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_practice/model/memo.dart';
+import 'package:firebase_practice/pages/memo_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class Toppage extends StatefulWidget {
@@ -9,12 +13,27 @@ class Toppage extends StatefulWidget {
 }
 
 class _TopPageState extends State<Toppage> {
-  int _counter = 0;
+  List<Memo> memoList = [];
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  Future<void> fetchMemo() async {
+    final memoCollection =
+        await FirebaseFirestore.instance.collection('memo').get();
+    final docs = memoCollection.docs;
+    for (var doc in docs) {
+      Memo fetchMemo = Memo(
+        title: doc.data()['title'],
+        detail: doc.data()['detail'],
+        createdDate: doc.data()['createdDate'],
+      );
+      memoList.add(fetchMemo);
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchMemo();
   }
 
   @override
@@ -24,22 +43,24 @@ class _TopPageState extends State<Toppage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: memoList.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(memoList[index].title),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MemoDetailPage(memo: memoList[index]),
+                ),
+              );
+            },
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Memo {
   Memo({
     required this.title,
@@ -8,6 +10,6 @@ class Memo {
 
   String title;
   String detail;
-  DateTime createdDate;
-  DateTime? updatedDate;
+  Timestamp createdDate;
+  Timestamp? updatedDate;
 }
